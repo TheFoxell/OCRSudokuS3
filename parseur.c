@@ -47,6 +47,8 @@ void parser(int grid[9][9],const char * filename)
 			x=fgetc(reader);
 
 		}
+		if(i!=81)
+			err(4,"parser: le fichier pas au bon format");
 	}
 	fclose(reader);
 }
