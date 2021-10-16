@@ -103,34 +103,57 @@ int main()
     // SDL_FreeSurface(image_surface);
     // SDL_FreeSurface(screen_surface);
 
-    void toGray()
+    
+    SDL_Surface* newCase = NULL;
+    
+    void SetCase( int wCase, int hCase)
+    {
+      //int _x = x;
+      //int _y = y;
+
+      
+      newCase = SDL_CreateRGBSurface(0,wCase,hCase,32,0,0,0,0);
+
+      
+      
+      for(int i = 0; i < wCase; i++)
+	for(int j = 0; j < hCase; j++)
+	  {
+	    Uint32 pixel = get_pixel(image_surface, i, j);
+	    //_y++;
+	    
+	    put_pixel(newCase, i, j, pixel);
+	    
+	  }
+      //_x++;
+      
+    }
+    /*
+    void GridCutout()
     {
       int width = image_surface->w;
       int height = image_surface->h;
+      int wCase = width / 9;
+      int hCase = height /9;
 
-      for(int i = 0; i < width;i++)
-	for(int j = 0; j < height; j++)
-	  {
-	    Uint32 pixel = get_pixel(image_surface, i, j);
-
-	    Uint8 r, g, b;
-	    SDL_GetRGB(pixel, image_surface->format, &r, &g, &b);
-
-	    Uint8 average = 0.3*r + 0.59*g + 0.11*b;
-	    r = average;
-	    g = average;
-	    b = average;
-
-	    Uint32 pixel2 = SDL_MapRGB(image_surface->format, r, g, b);
-
-	    put_pixel(image_surface, i, j, pixel2); 
-
-	  }
+      SDL_Surface* Case = SetCase(0,0, wCase,hCase);
+      
     }
-
-    toGray();
+    */
+    //GridCutout();
     
-    display_image(image_surface);
+    
+    SetCase(111,111);
+
+    if(newCase == NULL)
+      {
+	printf("Erreur création surface :%s", SDL_GetError());
+	return EXIT_FAILURE;
+      }
+
+    SDL_SaveBMP(newCase, "Cases/test.jpeg");
+    
+    display_image(newCase);
     display_image(screen_surface);
 
     wait_for_keypressed();
