@@ -40,7 +40,7 @@ int main()
       // If it fails, die with an error message.
       img = IMG_Load(path);
       if (!img)
-        errx(3, "can't load %s: %s", path, IMG_GetError());
+        errx(3, "can't load %s: %s \n", path, IMG_GetError());
 
       return img;
     }
@@ -106,27 +106,31 @@ int main()
     
     SDL_Surface* newCase = NULL;
     
-    void SetCase( int wCase, int hCase)
+    void SetCase(int wCase, int hCase, int x, int y)
     {
-      //int _x = x;
-      //int _y = y;
 
-      
       newCase = SDL_CreateRGBSurface(0,wCase,hCase,32,0,0,0,0);
 
+      int _x = x;
+      int _y = y;
       
       
       for(int i = 0; i < wCase; i++)
+	{
 	for(int j = 0; j < hCase; j++)
 	  {
-	    Uint32 pixel = get_pixel(image_surface, i, j);
-	    //_y++;
+	    printf(" i:%u j:%u x:%u y:%u \n",i,j,_x,_y);
+	    
+	    Uint32 pixel = get_pixel(image_surface, _x, _y);
 	    
 	    put_pixel(newCase, i, j, pixel);
-	    
+	    _y += 1;
+
+	    if(_y == y + hCase)
+	      _y = 0;
 	  }
-      //_x++;
-      
+	_x += 1;
+	}
     }
     /*
     void GridCutout()
@@ -143,24 +147,18 @@ int main()
     //GridCutout();
     
     
-    SetCase(111,111);
-
-    if(newCase == NULL)
-      {
-	printf("Erreur création surface :%s", SDL_GetError());
-	return EXIT_FAILURE;
-      }
+      SetCase(111,111,0,0);
 
     SDL_SaveBMP(newCase, "Cases/test.jpeg");
+
     
     display_image(newCase);
-    display_image(screen_surface);
 
     wait_for_keypressed();
-
     
     SDL_FreeSurface(image_surface);
     SDL_FreeSurface(screen_surface);
+    SDL_FreeSurface(newCase);
 
     return 0;
 }
