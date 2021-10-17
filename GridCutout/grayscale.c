@@ -124,12 +124,19 @@ int main()
 	    Uint32 pixel = get_pixel(image_surface, _x, _y);
 	    
 	    put_pixel(newCase, i, j, pixel);
-	    _y += 1;
 
-	    if(_y == y + hCase)
-	      _y = 0;
+   
+	    
+	    _y += 1;
+	    
+	    if(_y == (y + hCase))
+	      {
+		_y = y;
+		_x += 1;
+	      }
+	    
 	  }
-	_x += 1;
+	
 	}
     }
     /*
@@ -140,14 +147,19 @@ int main()
       int wCase = width / 9;
       int hCase = height /9;
 
-      SDL_Surface* Case = SetCase(0,0, wCase,hCase);
+      for(int i = 0; i < width; i += wCase)
+	{
+	  
+	}
       
     }
     */
+
+    
     //GridCutout();
+    SDL_Surface* Case = SetCase(0,0, wCase,hCase);
     
-    
-      SetCase(111,111,0,0);
+      SetCase(111,111,333,444);
 
     SDL_SaveBMP(newCase, "Cases/test.jpeg");
 
