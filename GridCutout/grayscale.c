@@ -1,18 +1,10 @@
 #include <err.h>
+#include <string.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
 
-// TODO: Insert all the above functions.
 
-//Uint32 pixel = get_pixel(image_surface, x, y);
-//put_pixel(image_surface, x, y, pixel);
-//Uint8 r, g, b;
-//SDL_GetRGB(pixel, image_surface->format, &r, &g, &b);
-//Uint32 pixel = SDL_MapRGB(image_surface->format, r, g, b);
-//int width = image_surface->w;
-//int height = image_surface->h;
-//update_surface(screen_image, surface_image);
 
 int main()
 {
@@ -96,12 +88,12 @@ int main()
 
     wait_for_keypressed();
 
-    // TODO: Free the image surface.
-    // TODO: Free the screen surface.
+
+    
     void SDL_FreeSurface(SDL_Surface *surface);
 
-    // SDL_FreeSurface(image_surface);
-    // SDL_FreeSurface(screen_surface);
+
+    
 
     
     SDL_Surface* newCase = NULL;
@@ -119,7 +111,7 @@ int main()
 	{
 	for(int j = 0; j < hCase; j++)
 	  {
-	    printf(" i:%u j:%u x:%u y:%u \n",i,j,_x,_y);
+	    //printf(" i:%u j:%u x:%u y:%u \n",i,j,_x,_y);
 	    
 	    Uint32 pixel = get_pixel(image_surface, _x, _y);
 	    
@@ -134,39 +126,58 @@ int main()
 		_y = y;
 		_x += 1;
 	      }
-	    
 	  }
-	
 	}
     }
-    /*
+
+
+
+
+    
+
     void GridCutout()
     {
+      
       int width = image_surface->w;
       int height = image_surface->h;
       int wCase = width / 9;
       int hCase = height /9;
 
-      for(int i = 0; i < width; i += wCase)
-	{
-	  
-	}
+      int width2 = wCase * 9;
+      int height2 = hCase * 9;
+
+      int m1 = 0;
+      int m2 = 0;
+
       
+      for(int i = 0; i < width2; i += wCase)
+	{
+	  for(int j = 0; j < height2; j += hCase)
+	    {
+	      SetCase(wCase,hCase,i,j);
+
+	      char str[13] = "Cases/";
+	      str[6] = m1 + '0';
+	      str[7] = m2 + '0';
+
+	      
+	      SDL_SaveBMP(newCase, str );
+	      
+	      display_image(newCase);
+
+	      wait_for_keypressed();
+	      m2 += 1;
+	      if(m2 == 9)
+		{
+		  m2 = 0;
+		}
+	    }
+	  m1 += 1;
+	}
     }
-    */
 
+    GridCutout();
     
-    //GridCutout();
-    SDL_Surface* Case = SetCase(0,0, wCase,hCase);
-    
-      SetCase(111,111,333,444);
-
-    SDL_SaveBMP(newCase, "Cases/test.jpeg");
-
-    
-    display_image(newCase);
-
-    wait_for_keypressed();
     
     SDL_FreeSurface(image_surface);
     SDL_FreeSurface(screen_surface);
