@@ -3,6 +3,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
+#include "griddetect.h"
 
 
 
@@ -37,7 +38,7 @@ int main()
       return img;
     }
 
-    image_surface = load_image("image_01.jpeg");
+    image_surface = load_image("image_02_bin2.jpg");
     screen_surface = image_surface;
     // TODO: Display the image.
 
@@ -135,11 +136,11 @@ int main()
 
     
 
-    void GridCutout()
+    void GridCutout(SDL_Surface *image)
     {
       
-      int width = image_surface->w;
-      int height = image_surface->h;
+      int width = image->w;
+      int height = image->h;
       int wCase = width / 9;
       int hCase = height /9;
 
@@ -175,8 +176,9 @@ int main()
 	  m1 += 1;
 	}
     }
-
-    GridCutout();
+    
+    image_surface = GridDetect(image_surface);
+    GridCutout(image_surface);
     
     
     SDL_FreeSurface(image_surface);
