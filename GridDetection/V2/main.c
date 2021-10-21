@@ -13,14 +13,13 @@
 //int histoRows[];
 //int histoCols[];
 
-void MakeHisto(SDL_Surface* image)
+void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
 {
   int width = image->w;
   int height = image->h;
-  int hCols[width];
 
   
-  for(int x = 0; x < width;x++)
+  for(int x = 0; x < width;x++) //Histo of Columns
     {
       int sum = 0;
       for(int y = 0; y < height; y++)
@@ -33,26 +32,80 @@ void MakeHisto(SDL_Surface* image)
 	  if(r + g + b < 500)
 	      sum++;
 	}
-      hCols[x] = sum;
+      if(sum > (width / 2.5)) //Detection cols
+	{
+	  for(int y = 0; y < height; y++)//Set line in red
+	    {
+	      Uint32 pixel = 0xFF0000FF;
+	      put_pixel(image, x, y, pixel);
+	    }
+	  hCols[x] = sum;
+	}
+      else
+	hCols[x] = 0;
     }
 
-  for(int i = 0; i < width; i++)
+  for(int y = 0; y < height;y++) //Histo of Rows
     {
-      printf("%u ", hCols[i]);
+      int sum = 0;
+      for(int x = 0; x < width; x++)
+	{
+	  Uint32 pixel = get_pixel(image,x,y);
+
+	  Uint8 r,g,b;
+	  SDL_GetRGB(pixel, image->format, &r,&g,&b);
+
+	  if(r + g + b < 500)
+	      sum++;
+	}
+      if(sum > (height / 2.5)) //Detection rows
+	{
+	  for(int x = 0; x < width; x++)//Set line in red
+	    {
+	      Uint32 pixel = 0xFF0000FF;
+	      put_pixel(image, x, y, pixel);
+	    }
+	  hRows[y] = sum;
+	}
+      else
+	hRows[y] = 0;
     }
+  for(int i = 0; i < width; i++)
+   printf("%u ",hCols[i]);
   
 }
 /*
+void FindLines(int histo[], int size, int lines[])
+{
+  //int index = 0;
+  for(int i = 0; i < size; i++)
+    {
+      lines[i] = histo[i];
+    }
+    }*/
+
+
 SDL_Surface* GridDetect(SDL_Surface* image)
 {
   int width = image->w;
   int height = image->h;
+  
+  int hCols[width];
+  int hRows[height];
+
+  //int selectedCols[width];
+  //int selectedRows[height];
+
+  MakeHisto(image,hCols,hRows);
+  //FindLines(hCols,width,selectedCols);
+  //FindLines(hRows,height,selectedRows);
+
 
   
   return image;
 }
 
-*/
+
 
 int main()
 {
@@ -86,7 +139,7 @@ int main()
       return img;
     }
 
-
+    
     SDL_Surface* display_image(SDL_Surface *img)
     {
       SDL_Surface *screen;
@@ -128,14 +181,14 @@ int main()
 	  SDL_PollEvent(&event);
 	} while(event.type != SDL_KEYUP);
     }
-
+    
     
     void SDL_FreeSurface(SDL_Surface *surface);
     
     //SDL_Surface* newCase = NULL;
 
     
-    image_surface = load_image("image_02_bin.jpg");
+    image_surface = load_image("image_02_bin2.jpg");
     screen_surface = image_surface;
 
     display_image(image_surface);
@@ -144,9 +197,7 @@ int main()
     wait_for_keypressed();
 
     
-    MakeHisto(image_surface);
-
-      //GridDetect(image_surface);
+    GridDetect(image_surface);
 
     display_image(image_surface);
     display_image(screen_surface);
