@@ -172,6 +172,8 @@ SDL_Surface* GridDetect(SDL_Surface* image)
   printf("%u %u \n", paraListRows[0], paraListRows[1]);
  
   reSize(paraListCols[1], paraListRows[1], paraListCols[0], paraListRows[0]);
+
+  SDL_SaveBMP(finalGrid, "grid.jpg");
   
   return image;
 }
