@@ -9,9 +9,9 @@ LDLIBS= `pkg-config --libs sdl SDL_image`
 
 all: gridcut
 
-gridcut: gridcut.o pixel_operations.o
+gridcut: gridcut.o griddetect.o pixel_operations.o
 
-gridcut.o: pixel_operations.h
+gridcut.o: pixel_operations.h griddetect.h
 
 clean:
 	${RM} *.o
