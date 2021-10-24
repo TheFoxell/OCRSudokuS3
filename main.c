@@ -1,18 +1,28 @@
+# include <string.h>
+# include "NeuralNetwork/NeuralNetwork_XOR.h"
+
+
 int main(int argc, char** argv)
 {
-	if(argc > 1)// at least must have one minimum argument
+	if(argc >= 1)// at least must have one minimum argument
     	{
-    		if(argv[2] == "xor")
+    		if(!strcmp(argv[1], "xor"))
             	{
                 	TestForNeuralNetwork();
                 	return 0;
             	}
         	       	
-        	if(argv[2] == "GridCutout")
+        	/*if(argv[2] == "GridCutout")
         	{
         		GridCutout();
         		return 0;
         	}
+        	
+        	if(argv[2] == "solver")
+        	{
+        		main();
+        		return 0;
+        	}*/
         	
         	//Not implemented
 		/*if(argv[2] == "GridDetection")
