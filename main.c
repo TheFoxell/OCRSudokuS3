@@ -1,5 +1,7 @@
 # include <string.h>
 # include "NeuralNetwork/NeuralNetwork_XOR.h"
+# include "solver/parseur.h"
+
 
 
 int main(int argc, char** argv)
@@ -12,20 +14,31 @@ int main(int argc, char** argv)
                 	return 0;
             	}
         	       	
-        	/*if(argv[2] == "GridCutout")
+        	
+        	
+        	/*if(!strcmp(argv[1] == "solver")
+        	{
+        		if (argc!=3)
+			errx(1,"Usage: filename");
+	 
+			parser(grid,argv[2]);
+
+			//solver here
+			solve();
+			recorder(grid, strcat(argv[2],".resultat"));
+			drawSudoku(grid, strcat(argv[2],".png"),8);
+			return 0;
+        	}*/ //TODO: add solver.h and remove main in solver.c
+        	
+        	//Not implemented
+		/*
+		if(argv[2] == "GridCutout")
         	{
         		GridCutout();
         		return 0;
         	}
         	
-        	if(argv[2] == "solver")
-        	{
-        		main();
-        		return 0;
-        	}*/
-        	
-        	//Not implemented
-		/*if(argv[2] == "GridDetection")
+		if(argv[2] == "GridDetection")
         	{
             		GridDetection();
             		return 0;
