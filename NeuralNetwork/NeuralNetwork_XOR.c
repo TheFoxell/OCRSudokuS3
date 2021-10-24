@@ -181,8 +181,14 @@ void ForwardPass(struct NeuralNetwork net, int inpValues, int epoch)
 	if (epoch % 100 == 0)
         {
 		if (inpValues == 0)
+		{
 			printf("\n");
-		printf("Input 1: %f | Input 2: %f | Output: %f\n",
+        		printf("====================\n");
+			printf("    epoch : %u      \n", epoch);
+			printf("====================\n");
+		}
+		
+		printf("x1: %f | x2: %f | Output: %f\n",
                  	NavMatrix(net.matInputValues, inpValues, 0),
                         NavMatrix(net.matInputValues, inpValues + 1, 0),
                         NavMatrix(net.FinalOutput, 0, 0));
@@ -311,8 +317,10 @@ void BackPropagation(struct NeuralNetwork net, int pattern)
 void TestForNeuralNetwork()
 {
 	struct NeuralNetwork nettest = InitializeNetwork();
-	for(int epoch = 0; epoch < 43500; epoch++)
+	for(int epoch = 0; epoch < 3000000; epoch++)
 	{
+		
+        		
 		for (int i = 0; i < 7; i += 2)
 		{
 			ForwardPass(nettest, i, epoch);
