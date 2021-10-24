@@ -18,6 +18,8 @@ int main(int argc, char** argv)
         	
         	/*if(!strcmp(argv[1] == "solver")
         	{
+        		int grid[9][9];
+        		
         		if (argc!=3)
 			errx(1,"Usage: filename");
 	 
