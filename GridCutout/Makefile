@@ -7,15 +7,15 @@ CFLAGS= -Wall -Wextra -Werror -std=c99 -O3
 LDFLAGS=
 LDLIBS= `pkg-config --libs sdl SDL_image`
 
-all: gridcut
+all: main
 
-gridcut: gridcut.o griddetect.o pixel_operations.o
+main: main.o gridcut.o griddetect.o pixel_operations.o
 
-gridcut.o: pixel_operations.h griddetect.h
+main.o: pixel_operations.h griddetect.h gridcut.h
 
 clean:
 	${RM} *.o
 	${RM} *.d
-	${RM} gridcut
+	${RM} main
 
 # END

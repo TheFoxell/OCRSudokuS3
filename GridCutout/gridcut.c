@@ -4,10 +4,11 @@
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
 #include "griddetect.h"
+#include "gridcut.h"
 
 
 
-int main()
+int GridDetCut()
 {
     SDL_Surface* image_surface;
     SDL_Surface* screen_surface;
