@@ -84,16 +84,4 @@ void solve()
 	solve_rec(0,0);
 }
 
-int main(int argc, char *argv[]) 
-{
-	if (argc!=2)
-		errx(1,"Usage: filename");
-	 
-	parser(grid,argv[1]);
 
-	//ici le solver
-	solve();
-	recorder(grid, strcat(argv[1],".resultat"));
-	drawSudoku(grid, strcat(argv[1],".png"),8);
-	return 0;
-}
