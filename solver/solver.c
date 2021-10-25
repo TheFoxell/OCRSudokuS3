@@ -2,13 +2,11 @@
 #include <err.h>
 #include "parseur.h"
 #include <string.h>
-#include "draw.h"
 
 
 
-int grid[9][9];
 
-int already_in_column(int x, int val)
+int already_in_column(int grid[9][9],int x, int val)
 {
 	int i=0;
 	while (i<9 && val!=grid[i][x])
@@ -18,7 +16,7 @@ int already_in_column(int x, int val)
         return i != 9;
 }
 
-int already_in_line(int y, int val)
+int already_in_line(int grid[9][9],int y, int val)
 {
         int i=0;
         while (i<9 && val!=grid[y][i])
@@ -28,7 +26,7 @@ int already_in_line(int y, int val)
         return i != 9;
 }
 
-int already_in_square(int x, int y, int val)
+int already_in_square(int grid[9][9], int x, int y, int val)
 {
 	x /= 3;
         y /= 3;
@@ -42,7 +40,7 @@ int already_in_square(int x, int y, int val)
         return i != 9;
 }
 
-int solve_rec(int x, int y)
+int solve_rec(int grid[9][9],int x, int y)
 {
 	if (y>8)
 	{
@@ -59,17 +57,17 @@ int solve_rec(int x, int y)
 
 	if (grid[y][x]!=0)
         {
-        	return solve_rec(nextX, nextY);
+        	return solve_rec(grid,nextX, nextY);
         }
 
         for (int i = 1; i < 10; i++)
         {
-        	if (!already_in_column(x,i)
-		&&  !already_in_line(y,i)
-		&&  !already_in_square(x,y,i))
+        	if (!already_in_column(grid,x,i)
+		&&  !already_in_line(grid,y,i)
+		&&  !already_in_square(grid,x,y,i))
         	{
 			grid[y][x] = i;
-                	if (solve_rec(nextX,nextY))
+                	if (solve_rec(grid,nextX,nextY))
                     	{
 				return 1;
                     	}
@@ -79,9 +77,9 @@ int solve_rec(int x, int y)
         return 0;
 }
 
-void solve()
+void solve(int grid[9][9])
 {
-	solve_rec(0,0);
+	solve_rec(grid,0,0);
 }
 
 
