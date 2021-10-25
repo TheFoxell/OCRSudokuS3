@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 `pkg-config --cflags sdl`
 LDFLAGS =
 LDLIBS = -lm `pkg-config --libs sdl` -lSDL -lSDL_image
 
-SRC = main.c NeuralNetwork/NeuralNetwork_XOR.c NeuralNetwork/Tools.c
+SRC = main.c NeuralNetwork/NeuralNetwork_XOR.c NeuralNetwork/Tools.c solver/draw.c solver/parseur.c solver/solver.c solver/pixel_operations.c
 
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}

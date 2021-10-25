@@ -4,18 +4,18 @@ CC=gcc
 
 CPPFLAGS= `pkg-config --cflags sdl` -MMD
 CFLAGS= -Wall -Wextra -Werror -std=c99 -O3
-LDFLAGS=
+LDFLAGS= -lm
 LDLIBS= `pkg-config --libs sdl SDL_image`
 
-all: gridcut
+all: main
 
-gridcut: gridcut.o griddetect.o pixel_operations.o
+main: main.o pixel_operations.o
 
-gridcut.o: pixel_operations.h griddetect.h
+main.o: pixel_operations.h
 
 clean:
 	${RM} *.o
 	${RM} *.d
-	${RM} gridcut
+	${RM} main
 
 # END

@@ -1,15 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <err.h>
 #include <string.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
+#include <math.h>
+
+
+SDL_Surface* GlBlur(SDL_Surface* image)
+{
+  int width = image->w;
+  int height = image->h;
+
+  double g(int x, int y, double sigma)
+  {
+    return 1. / (2 * M_PI * sigma * sigma) *
+      exp(-(x * x + y * y) / (2 * sigma * sigma));
+  }
+
+  double filtre[11][11];
+  double sigma = 0.84089642;
+
+  int x,y;
+  for(y = -5; y <= 5;y++)
+    for(x = -5 ; x <= 5; x++)
+      filtre[x + 5][y + 5] = g(x,y,sigma);
+
+  for(y = 0; y < 11; y++)
+    {
+      for (x = 0; x < 11; x++)
+	printf("%.2f ", filtre[x][y]);
+    }
+
+  for(int x = 5; x < width - 5; x++)
+    {
+      for(int y = 5; y < height - 5;y++)
+	{
+	  double redVal = 0.0;
+	  double greenVal = 0.0;
+	  double blueVal = 0.0;
+
+	  //Convolution step
+
+	  for(int filtreX = -5; filtreX <= 5; filtreX++)
+	    {
+	      for(int filtreY = -5; filtreY <= 5; filtreY++)
+		{
+		  double filtreVal = filtre[filtreX + 5][filtreY + 5];
+
+		   Uint32 pixel = get_pixel(image, x - filtreX, y - filtreY);
+		   Uint8 r,g,b;
+		   SDL_GetRGB(pixel, image->format, &r, &g, &b);	    
+		   double newR = (double) r;
+		   double newG = (double) g;
+		   double newB = (double) b;
+
+		   redVal += newR * filtreVal;
+		   greenVal += newG * filtreVal;
+		   blueVal += newB * filtreVal; 
+		    
+		}
+	    }
+	  Uint32 pixel2 = SDL_MapRGB(image->format, (Uint8) redVal, (Uint8) greenVal, (Uint8) blueVal);
+
+	  put_pixel(image,x,y,pixel2);
+	  
+	}
+    }
+  return image;
+}
 
 
 
 int main()
 {
-    SDL_Surface* image_surface;
-    SDL_Surface* screen_surface;
+  
+  SDL_Surface* image_surface;
+  SDL_Surface* screen_surface;
 
     // TODO: Initialize the SDL
 
@@ -37,9 +105,6 @@ int main()
       return img;
     }
 
-    image_surface = load_image("image_01.jpeg");
-    screen_surface = image_surface;
-    // TODO: Display the image.
 
     SDL_Surface* display_image(SDL_Surface *img)
     {
@@ -64,9 +129,6 @@ int main()
       // return the screen for further uses
       return screen;
     }
-
-    display_image(image_surface);
-    display_image(screen_surface);
     
     // TODO: Wait for a key to be pressed.
     void wait_for_keypressed()
@@ -86,102 +148,33 @@ int main()
 	} while(event.type != SDL_KEYUP);
     }
 
-    wait_for_keypressed();
-
-
     
     void SDL_FreeSurface(SDL_Surface *surface);
-
+    
+    //SDL_Surface* newCase = NULL;
 
     
+    image_surface = load_image("image_01.jpeg");
+    screen_surface = image_surface;
 
+    display_image(image_surface);
+    display_image(screen_surface);
+
+    wait_for_keypressed();
     
-    SDL_Surface* newCase = NULL;
-    
-    void SetCase(int wCase, int hCase, int x, int y)
-    {
+    GlBlur(image_surface);
 
-      newCase = SDL_CreateRGBSurface(0,wCase,hCase,32,0,0,0,0);
+    display_image(image_surface);
+    display_image(screen_surface);
 
-      int _x = x;
-      int _y = y;
-      
-      
-      for(int i = 0; i < wCase; i++)
-	{
-	for(int j = 0; j < hCase; j++)
-	  {
-	    //printf(" i:%u j:%u x:%u y:%u \n",i,j,_x,_y);
-	    
-	    Uint32 pixel = get_pixel(image_surface, _x, _y);
-	    
-	    put_pixel(newCase, i, j, pixel);
+    wait_for_keypressed();
 
-   
-	    
-	    _y += 1;
-	    
-	    if(_y == (y + hCase))
-	      {
-		_y = y;
-		_x += 1;
-	      }
-	  }
-	}
-    }
-
-
-
-
-    
-
-    void GridCutout()
-    {
-      
-      int width = image_surface->w;
-      int height = image_surface->h;
-      int wCase = width / 9;
-      int hCase = height /9;
-
-      int width2 = wCase * 9;
-      int height2 = hCase * 9;
-
-      int m1 = 0;
-      int m2 = 0;
-
-      
-      for(int i = 0; i < width2; i += wCase)
-	{
-	  for(int j = 0; j < height2; j += hCase)
-	    {
-	      SetCase(wCase,hCase,i,j);
-
-	      char str[13] = "Cases/";
-	      str[6] = m1 + '0';
-	      str[7] = m2 + '0';
-
-	      
-	      SDL_SaveBMP(newCase, str );
-	      
-	      display_image(newCase);
-
-	      wait_for_keypressed();
-	      m2 += 1;
-	      if(m2 == 9)
-		{
-		  m2 = 0;
-		}
-	    }
-	  m1 += 1;
-	}
-    }
-
-    GridCutout();
-    
     
     SDL_FreeSurface(image_surface);
     SDL_FreeSurface(screen_surface);
-    SDL_FreeSurface(newCase);
+
+      
+
 
     return 0;
 }
