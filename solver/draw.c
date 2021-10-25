@@ -153,19 +153,19 @@ void drawGrid(SDL_Surface *img,size_t size)
 {
 	//size_t width = img->w;
 	//size_t depth =img->h;
-	for(size_t i =0;i<10 ;i++)
-        {
-		for(size_t j =0;j<90*size ;j++)
+	for(size_t i =0;i<4 ;i++)
+		for(size_t j =0;j<95*size ;j++)
 		{
-			drawSquare(img, size, j, i*size*10);
-			drawSquare(img, size, i*size*10,j);
-
-			//put_pixel(img, j, i*10, SDL_MapRGB(img->format,255,255,255));
-			//put_pixel(img, i*10, j, SDL_MapRGB(img->format,255,255,255));
+			drawSquare(img, size*2, j,(31*i)*size);
+			drawSquare(img, size*2, (31*i)*size,j);
 		}
-	}
-	put_pixel(img, size*91-1, size*91-1, SDL_MapRGB(img->format,255,255,255));
-
+	for(size_t x=0;x<3;x++)
+		for(size_t i =0;i<2 ;i++)
+                	for(size_t j =0;j<95*size ;j++)
+			{
+				drawSquare(img, size, j,(31*x+11+10*i)*size);
+                        	drawSquare(img, size, (31*x+11+10*i)*size,j);
+			}
 }
 
 void drawNumber(SDL_Surface *img,size_t size ,size_t index,size_t x, size_t y)
@@ -199,13 +199,14 @@ void drawSudoku(int grid[9][9], char filename[],size_t size)
 {
 
         init_sdl();
-	image_surface = create_image(91*size,91*size);
-	
+	image_surface = create_image(95*size,95*size);
         drawGrid(image_surface,size);
+
+	
 	for(size_t i =0; i<9;i++)
 		for(size_t j =0; j<9;j++)
-                	drawNumber(image_surface,size,grid[j][i],(3+i*10)*size,(2+j*10)*size);
-    // Display the image.
+                	drawNumber(image_surface,size,grid[j][i],(4+i/3+i*10)*size,(3+j/3+j*10)*size);
+	// Display the image.
         screen_surface=display_image(image_surface);
     // Wait for a key to be pressed.
 	

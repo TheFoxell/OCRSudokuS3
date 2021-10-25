@@ -29,9 +29,9 @@ int main(int argc, char** argv)
 			parser(grid,argv[2]);
 
 			//solver here
-			solve();
+			solve(grid);
 			recorder(grid, strcat(argv[2],".resultat"));
-			drawSudoku(grid, strcat(argv[2],".png"),8);
+			drawSudoku(grid, strcat(argv[2],".png"),2);
 			return 0;
 		}
 
