@@ -1,6 +1,6 @@
-#ifndef	PARSEUR_H
-#define PARSEUR_H
+#ifndef	SOLVER_H
+#define SOLVER_H
 
-void solve(int grid[9][9]);
+void solve(); 
 
 #endif
