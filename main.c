@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 			//solver here
 			solve(grid);
 			recorder(grid, strcat(argv[2],".resultat"));
-			drawSudoku(grid, strcat(argv[2],".png"),2);
+			drawSudoku(grid, strcat(argv[2],".png"),8);
 			return 0;
 		}
 
