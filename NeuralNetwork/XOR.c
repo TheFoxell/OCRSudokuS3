@@ -1,6 +1,6 @@
-#include "NeuralNetwork_XOR.h"
+#include "XOR.h"
 #include <math.h>
-#include "Tools.h"
+#include "Matrix.h"
 
 struct NeuralNetwork
 {
@@ -133,7 +133,7 @@ struct NeuralNetwork InitializeNetwork()
 	InitMatrixZero(net.matPreviousWeightsIH);
         InitMatrixZero(net.matPreviousBiasH);
 	ChangeMatrix(net.SumHOutputs, 0, 0, 0.0);
-	net.LearningRate = 1.414213562;
+	net.LearningRate = 1;
 	net.ConstanteUpdate =  0.25;
 	ChangeMatrix(net.PreviousBiasO, 0, 0, 0.0);
 	return net;
@@ -184,7 +184,7 @@ void ForwardPass(struct NeuralNetwork net, int inpValues, int epoch)
 		{
 			printf("\n");
         		printf("====================\n");
-			printf("    epoch : %u      \n", epoch);
+			printf("   epoch : %u       \n", epoch);
 			printf("====================\n");
 		}
 		
@@ -314,10 +314,10 @@ void BackPropagation(struct NeuralNetwork net, int pattern)
 }
 
 // Function that train the neural network
-void TestForNeuralNetwork()
+void XOR()
 {
 	struct NeuralNetwork nettest = InitializeNetwork();
-	for(int epoch = 0; epoch < 3000000; epoch++)
+	for(int epoch = 0; epoch < 100000; epoch++)
 	{
 		
         		
