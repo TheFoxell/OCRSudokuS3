@@ -54,3 +54,6 @@ dkms.conf
 # os
 .DS_Store
 
+Cases/
+grid.jpg
+main
