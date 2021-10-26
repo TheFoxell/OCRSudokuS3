@@ -16,7 +16,6 @@ main.o: pixel_operations.h rotation.h
 clean:
 	${RM} *.o
 	${RM} *.d
-	${RM} display
-	${RM} rotation
+	${RM} main
 
 # END
