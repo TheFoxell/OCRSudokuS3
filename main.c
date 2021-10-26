@@ -1,7 +1,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <err.h>
-# include "NeuralNetwork/NeuralNetwork_XOR.h"
+# include "NeuralNetwork/XOR.h"
 # include "solver/parseur.h"
 # include "solver/solver.h"
 # include "solver/draw.h"
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 			if (argc > 2)
 				errx(1,"Too many args");
 
-			TestForNeuralNetwork();
+			XOR();
                 	return 0;
             	}
         	       	

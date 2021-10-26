@@ -1,12 +1,8 @@
-#include "Tools.h"
+#include "Matrix.h"
 #include <math.h>
 
 
 int CheckCoord(struct Matrix matrix, int x, int y);
-
-//========================================//
-//		Start Matrices		  //
-//========================================//
 
 // Create a matrix; return the matrix
 struct Matrix CreateMatrix(int rows, int columns)
@@ -33,9 +29,7 @@ double NavMatrix(struct Matrix matrix, int x, int y)
 {
 	if (!CheckCoord(matrix, x, y))
 	{
-		printf("====================\n");
 		printf("Error in coordinates\n");
-		printf("====================\n");
 	}
 	int index = x * matrix.columns + y;
 	return *(matrix.mat + index);
@@ -46,9 +40,7 @@ void ChangeMatrix(struct Matrix matrix, int x, int y, float val)
 {
 	if (!CheckCoord(matrix, x, y))
 	{
-		printf("====================\n");
                 printf("Error in coordinates\n");
-                printf("====================\n");
 	}
         *(matrix.mat + x * matrix.columns + y) = val;
 }
@@ -66,7 +58,6 @@ void PrintMatrix(struct Matrix matrix)
 	}
 }
 
-// Initialize the matrix with zeros
 void InitMatrix(struct Matrix matrix)
 {
 	for (int i = 0; i < matrix.rows; i++)
@@ -89,9 +80,6 @@ void InitMatrixZero(struct Matrix matrix)
         }
 
 }
-//========================================//
-//              End Matrices              //
-//========================================//
 
 double Random()
 {
