@@ -8,6 +8,8 @@
 # include "GridCutout/gridcut.h"
 # include "GridCutout/griddetect.h"
 # include "rotation/rotation.h"
+# include "simpleblackandwhite/gray.h"
+
 
 
 
@@ -60,9 +62,15 @@ int main(int argc, char** argv)
         		return 0;
 		}*/ //Work in progress...
 		
+		if(!strcmp(argv[1], "grayscale"))
+        	{
+			if (argc > 2)
+				errx(1,"Too many args");
+
+        		grayscale();
+        		return 0;
+		}
 		
-		
-        	//TODO: add binarization etc ...
 
         	printf("Unknown command.\n");
         	return 1;
