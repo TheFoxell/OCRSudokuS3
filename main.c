@@ -50,7 +50,7 @@ int main(int argc, char** argv)
         		GridDetCut();
         		return 0;
 		}
-		
+		/*
 		if(!strcmp(argv[1], "rotation"))
         	{
 			if (argc!=3)
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 
         		menuRotation(argv[2]);
         		return 0;
-		}
+		}*/ //Work in progress...
 		
 		
 		
