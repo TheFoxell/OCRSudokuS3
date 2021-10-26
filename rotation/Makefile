@@ -7,12 +7,11 @@ CFLAGS= -Wall -Wextra -Werror -std=c99 -O3
 LDFLAGS=
 LDLIBS= `pkg-config --libs sdl SDL_image`
 
-all: display rotation
+all: main
 
-display: display.o
-rotation: pixel_operations.o rotation.o
+main: pixel_operations.o rotation.o
 
-rotation.o: pixel_operations.h
+main.o: pixel_operations.h rotation.h
 
 clean:
 	${RM} *.o

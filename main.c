@@ -7,6 +7,8 @@
 # include "solver/draw.h"
 # include "GridCutout/gridcut.h"
 # include "GridCutout/griddetect.h"
+# include "rotation/rotation.h"
+
 
 
 int main(int argc, char** argv)
@@ -48,6 +50,18 @@ int main(int argc, char** argv)
         		GridDetCut();
         		return 0;
 		}
+		
+		if(!strcmp(argv[1], "rotation"))
+        	{
+			if (argc!=3)
+				errx(1,"Usage: rotation \"filename\"");
+
+        		menuRotation(argv[2]);
+        		return 0;
+		}
+		
+		
+		
         	//TODO: add binarization etc ...
 
         	printf("Unknown command.\n");
