@@ -165,9 +165,6 @@ int GridDetCut()
 	      
 	      SDL_SaveBMP(newCase, str );
 	      
-	      display_image(newCase);
-
-	      wait_for_keypressed();
 	      m2 += 1;
 	      if(m2 == 9)
 		{
