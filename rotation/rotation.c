@@ -144,7 +144,7 @@ int present(char filename[])
 
     init_sdl();
 
-    image_surface = load_image(filename[]);
+    image_surface = load_image(filename);
     screen_surface = display_image(image_surface);
 
     // wait a key
@@ -174,12 +174,11 @@ void menuRotation(char filename[])
         // display an image
         SDL_Surface* image_surface;
         SDL_Surface* screen_surface;
-
+	SDL_Surface* new_img;
         init_sdl();
 
-        image_surface = load_image(filename[]);
+        image_surface = load_image(filename);
         screen_surface = display_image(image_surface);
-
         SDL_Event event;
         int continu = 1;
         int angl=0;
@@ -195,24 +194,22 @@ void menuRotation(char filename[])
                                 switch(event.key.keysym.sym)
                                 {
                                         case(SDLK_s):
-                                                SDL_SaveBMP(strcat("r",image_surface),filename);
+                                                SDL_SaveBMP(new_img ,"rotation_image.jpg");
                                                 break;
                                         case(SDLK_q):
                                                 continu=0;
                                                 break;
-                                        case(SDLK_right):
-                                                SDL_Surface* new_img = rotation(image_surface, angl--);
+                                        case(SDLK_RIGHT):
+                                                new_img = rotation(image_surface,angl++);
                                                 screen_surface = display_image(new_img);
-                                        case(SDLK_left):
-                                                SDL_Surface* new_img = rotation(image_surface,angle++);
+						break;
+                                        case(SDLK_LEFT):
+                                                new_img = rotation(image_surface,angl--);
                                                 screen_surface = display_image(new_img);
-                                        default:
+                                        	break;
+					default:
                                                 break;
                                 }
-                                do
-                                {
-                                        SDL_PollEvent(&event);
-                                } while(event.type != SDL_KEYUP);
                                 break;
                 }
 
