@@ -3,6 +3,7 @@
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
 #include <math.h>
+#include <string.h>
 
 int max( int a , int b)
 {
@@ -135,7 +136,7 @@ void wait_for_keypressed()
 
 void SDL_FreeSurface(SDL_Surface *surface);
 
-int main()
+int present(char filename[])
 {
     // display an image
     SDL_Surface* image_surface;
@@ -143,7 +144,7 @@ int main()
 
     init_sdl();
 
-    image_surface = load_image("my_image.jpg");
+    image_surface = load_image(filename[]);
     screen_surface = display_image(image_surface);
 
     // wait a key
@@ -168,4 +169,55 @@ int main()
     return 0;
 }
 
- 
+void menuRotation(char filename[])
+{
+        // display an image
+        SDL_Surface* image_surface;
+        SDL_Surface* screen_surface;
+
+        init_sdl();
+
+        image_surface = load_image(filename[]);
+        screen_surface = display_image(image_surface);
+
+        SDL_Event event;
+        int continu = 1;
+        int angl=0;
+        while(continu)
+        {
+                SDL_WaitEvent(&event);
+                switch(event.type)
+                {
+                        case SDL_QUIT:
+                                continu=0;
+                                break;
+                        case SDL_KEYDOWN:
+                                switch(event.key.keysym.sym)
+                                {
+                                        case(SDLK_s):
+                                                SDL_SaveBMP(strcat("r",image_surface),filename);
+                                                break;
+                                        case(SDLK_q):
+                                                continu=0;
+                                                break;
+                                        case(SDLK_right):
+                                                SDL_Surface* new_img = rotation(image_surface, angl--);
+                                                screen_surface = display_image(new_img);
+                                        case(SDLK_left):
+                                                SDL_Surface* new_img = rotation(image_surface,angle++);
+                                                screen_surface = display_image(new_img);
+                                        default:
+                                                break;
+                                }
+                                do
+                                {
+                                        SDL_PollEvent(&event);
+                                } while(event.type != SDL_KEYUP);
+                                break;
+                }
+
+        }
+        SDL_FreeSurface(image_surface);
+        SDL_FreeSurface(screen_surface);
+
+}
