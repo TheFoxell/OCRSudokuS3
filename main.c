@@ -5,6 +5,8 @@
 # include "solver/parseur.h"
 # include "solver/solver.h"
 # include "solver/draw.h"
+# include "GridCutout/gridcut.h"
+# include "GridCutout/griddetect.h"
 
 
 int main(int argc, char** argv)
@@ -13,7 +15,10 @@ int main(int argc, char** argv)
     	{
     		if(!strcmp(argv[1], "xor"))
             	{
-                	TestForNeuralNetwork();
+			if (argc > 2)
+				errx(1,"Too many args");
+
+			TestForNeuralNetwork();
                 	return 0;
             	}
         	       	
@@ -24,7 +29,7 @@ int main(int argc, char** argv)
         		int grid[9][9];
         		
         		if (argc!=3)
-				errx(1,"Usage: filename");
+				errx(1,"Usage: solver \"filename\"");
 	 
 			parser(grid,argv[2]);
 
@@ -35,21 +40,14 @@ int main(int argc, char** argv)
 			return 0;
 		}
 
-        	//Not implemented
-		/*
-		if(argv[2] == "GridCutout")
+		if(!strcmp(argv[1], "GridCutout"))
         	{
-        		GridCutout();
+			if (argc > 2)
+				errx(1,"Too many args");
+
+        		GridDetCut();
         		return 0;
-        	}
-        	
-		if(argv[2] == "GridDetection")
-        	{
-            		GridDetection();
-            		return 0;
-        	}
-        	*/
-        	
+		}
         	//TODO: add binarization etc ...
 
         	printf("Unknown command.\n");

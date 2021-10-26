@@ -39,7 +39,7 @@ int GridDetCut()
       return img;
     }
 
-    image_surface = load_image("image_02_bin2.jpg");
+    image_surface = load_image("GridCutout/image_02_bin2.jpg");
     screen_surface = image_surface;
     // TODO: Display the image.
 
