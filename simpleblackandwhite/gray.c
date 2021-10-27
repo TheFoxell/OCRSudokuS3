@@ -25,6 +25,7 @@ int grayscale()
     int width = image_surface->w;
     int height = image_surface->h;
 
+    //for each pixel calculation of its value, if greater than the threshold then white, if less then black
     for ( int i = 0 ; i < width ; i ++)
     {
 	    for (int j = 0 ; j < height ; j++)
