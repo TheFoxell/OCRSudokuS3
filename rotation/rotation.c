@@ -27,6 +27,7 @@ int min( int a , int b)
 
 SDL_Surface* rotation(SDL_Surface* image_surface, int angl)
 {
+  angl%=360;
   float radians = (2*3.1416*angl)/360;
 
   float cosine = (float) cos(radians);
@@ -49,7 +50,12 @@ SDL_Surface* rotation(SDL_Surface* image_surface, int angl)
   float maxy=max(y1,max(y2,y3));
   
   SDL_Surface* new_img;
-  new_img = SDL_CreateRGBSurface(0,fabsf(maxx)-minx,fabsf(maxy)-miny,image_surface->format->BitsPerPixel,image_surface->format->Rmask,image_surface->format->Gmask,image_surface->format->Bmask,image_surface->format->Amask);
+  new_img = SDL_CreateRGBSurface(0,fabsf(maxx)-minx,fabsf(maxy)-miny,
+		  image_surface->format->BitsPerPixel,
+		  image_surface->format->Rmask,
+		  image_surface->format->Gmask,
+		  image_surface->format->Bmask,
+		  image_surface->format->Amask);
  
  
 
@@ -196,22 +202,22 @@ void menuRotation(char filename[])
                         case SDL_KEYDOWN:
                                 switch(event.key.keysym.sym)
                                 {
-                                        case(SDLK_s):
-                                                SDL_SaveBMP(new_img ,"rotation_image.jpg");
-                                                break;
-                                        case(SDLK_q):
-                                                continu=0;
-                                                break;
-                                        case(SDLK_RIGHT):
-                                                new_img = rotation(image_surface,angl++);
-                                                screen_surface = display_image(new_img);
-						break;
-                                        case(SDLK_LEFT):
-                                                new_img = rotation(image_surface,angl--);
-                                                screen_surface = display_image(new_img);
-                                        	break;
-					default:
-                                                break;
+                                case(SDLK_s):
+                                SDL_SaveBMP(new_img ,"rotation_image.jpg");
+                                break;
+                                case(SDLK_q):
+                                continu=0;
+                                break;
+        	                case(SDLK_RIGHT):
+                                new_img = rotation(image_surface,angl++);
+                                screen_surface = display_image(new_img);
+				break;
+                                case(SDLK_LEFT):
+                          	new_img = rotation(image_surface,angl--);
+                                screen_surface = display_image(new_img);
+                        	break;
+				default:  
+				break;
                                 }
                                 break;
                 }

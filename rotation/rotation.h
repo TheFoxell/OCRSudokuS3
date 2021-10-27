@@ -11,5 +11,4 @@
 #include <string.h>
 
 void menuRotation(char filename[]); 
-int present(char filename[]);
 #endif
