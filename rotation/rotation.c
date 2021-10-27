@@ -179,6 +179,7 @@ void menuRotation(char filename[])
 
         image_surface = load_image(filename);
         screen_surface = display_image(image_surface);
+	new_img=image_surface;
         SDL_Event event;
         int continu = 1;
         int angl=0;
