@@ -10,5 +10,5 @@
 #include <math.h>
 #include <string.h>
 
-void menuRotation(char filename[]); 
+void menuRotation(char filename[]);
 #endif
