@@ -7,6 +7,7 @@
 #include <math.h>
 #include <string.h>
 
+//maximum
 int max( int a , int b)
 {
   if (a < b)
@@ -16,6 +17,7 @@ int max( int a , int b)
   return a;
 }
 
+//minimum
 int min( int a , int b)
 {
   if (a > b)
@@ -25,30 +27,36 @@ int min( int a , int b)
   return a;
 }
 
+//rotation function
 SDL_Surface* rotation(SDL_Surface* image_surface, int angl)
 {
+  //calculation of the sin and cos of the angle
   angl%=360;
   float radians = (2*3.1416*angl)/360;
 
+  //calcul of the sin and cos of the angle
   float cosine = (float) cos(radians);
   float sine = (float) sin(radians);
 
+  //calcul the size of the input image
   int width = image_surface->w;
   int height = image_surface->h;
     
+  //calcul of the new surface according to the old one
   float x1 = (- height * sine);
   float y1 = (height*cosine);
   float x2 = (width*cosine - height*sine);
   float y2 = (height*cosine + width*sine);
-
   float x3 = (width*cosine);
   float y3= (width*sine);
 
+  //Calcul for the size of the new image
   float minx=min(0,min(x1,min(x2,x3))); 
   float miny=min(0,min(y1,min(y2,y3))); 
   float maxx=max(x1,max(x2,x3)); 
   float maxy=max(y1,max(y2,y3));
   
+  //create the new image
   SDL_Surface* new_img;
   new_img = SDL_CreateRGBSurface(0,fabsf(maxx)-minx,fabsf(maxy)-miny,
 		  image_surface->format->BitsPerPixel,
@@ -59,6 +67,8 @@ SDL_Surface* rotation(SDL_Surface* image_surface, int angl)
  
  
 
+
+  //for each pixel of the new image, associate the corresponding pixel of the original image
     for ( int x = 0 ; x < new_img->w ; x ++)
     {
 	    for (int y = 0 ; y < new_img->h ; y++)
