@@ -3,6 +3,7 @@
 #include "SDL/SDL_image.h"
 #include "pixel_operations.h"
 
+//histogram of the different gray values of the image
 int histogram(SDL_Surface *img)
 {
   static Uint8 hist[256];
