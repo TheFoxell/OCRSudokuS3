@@ -7,9 +7,9 @@ CFLAGS= -Wall -Wextra -Werror -std=c99 -O3
 LDFLAGS=
 LDLIBS= `pkg-config --libs sdl SDL_image`
 
-all: main
+all: solver
 
-main: solver.c parseur.c draw.c pixel_operations.c
+solver:main.c solver.c parseur.c draw.c pixel_operations.c
 
 draw: pixel_operations.o draw.o
 
