@@ -15,6 +15,6 @@ int main(int argc, char **argv)
 
 	solve(grid);
 	recorder(grid, strcat(argv[1],".resultat"));
-	drawSudoku(grid, strcat(argv[1],".png"),8);
+	drawSudoku(grid, strcat(argv[1],".bmp"),8);
 	return 0;
 }
