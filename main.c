@@ -9,7 +9,8 @@
 # include "GridCutout/griddetect.h"
 # include "rotation/rotation.h"
 # include "simpleblackandwhite/gray.h"
-
+# include "tool/tool_image.h"
+# include "tool/pixel_operations.h"
 
 
 
