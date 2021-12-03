@@ -35,16 +35,16 @@ void RotAndCut(char filename[])
   int width = image->w;
   int height = image->h;
   
-  int hCols[] = calloc(width, sizeof(int));
-  int hRows[] = calloc(height, sizeof(int));
+  int * hCols = (int *) calloc(width, sizeof(int));
+  int * hRows = (int *) calloc(height, sizeof(int));
 
   MakeHisto(image2, hCols, hRows);
 
   int angl = 0;
 
-  while(nbrElmt(hCols, width)< width/10 && nbrElmt(hRows, height)< height/10)
+  while(nbrElmt(hCols, width)< width/100 && nbrElmt(hRows, height)< height/100)
     {
-      image2 = rotation(image, angl--);
+      image2 = rotation(image, angl++);
       
       hCols = realloc(hCols, (image2->w) * sizeof(int));
       hRows = realloc(hRows, (image2->h) * sizeof(int));
@@ -53,6 +53,9 @@ void RotAndCut(char filename[])
     }
   SDL_SaveBMP(image2, "image_rot.jpg");
   GridDetCut("image_rot.jpg");
+
+  free(hCols);
+  free(hRows);
 }
 
 
