@@ -22,7 +22,7 @@ int nbrElmt(int histo[], int len)
   return nbr;
 }
 
-void RotAndCut(char filename[])
+void RotAndCut(char filename[], int sens)
 {
   SDL_Surface* image;
   SDL_Surface* image2;
@@ -42,9 +42,12 @@ void RotAndCut(char filename[])
 
   int angl = 0;
 
-  while(nbrElmt(hCols, width)< width/100 && nbrElmt(hRows, height)< height/100)
+  while(nbrElmt(hCols, width)< width/75 && nbrElmt(hRows, height)< height/75)
     {
-      image2 = rotation(image, angl++);
+      image2 = rotation(image, angl += sens);
+
+      width = image2->w;
+      height = image2->h;
       
       hCols = realloc(hCols, (image2->w) * sizeof(int));
       hRows = realloc(hRows, (image2->h) * sizeof(int));
@@ -62,5 +65,11 @@ void RotAndCut(char filename[])
 
 int main()
 {
-  RotAndCut("image_torotate1.jpg");
+  /*
+    param : RotAndCut(name, sens);
+    sens = 1 : left rotation
+    sens = 2 : right rotation
+  */
+  
+  RotAndCut("image_torotate1.jpg", 1);
 }
