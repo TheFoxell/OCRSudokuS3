@@ -2,7 +2,7 @@
 
 int main()
 {
-	char file[] = "my_image.jpg";
+	char file[] = "image_torotate1.jpg";
   	menuRotation(file);
   	return 0;
 }

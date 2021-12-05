@@ -2,7 +2,7 @@
 
 int main()
 {
-  GridDetCut();
+  GridDetCut("image_02_bin2.jpg");
   
   return 0;
 }
