@@ -1,7 +1,7 @@
 all: main
 
 main: 
-	gcc -o nn.out DigitRecognition.c nn.c dataLoader.c pixel_operations.c -lSDL_image -lSDL -lm
+	gcc -o nn.out DigitRecognition.c nn.c dataLoader.c pixel_operations.c -lSDL_image -lSDL -lm -lSDL_gfx
 
 .PHONY: clean
 
