@@ -107,14 +107,20 @@ SDL_Surface* load_image(char *path)
 
 Image* putPixels(char *path, Image* img)
 {
+    
     SDL_Surface* ImgSurface = load_image(path);
+    
+    double zoomx = 28  / (float)ImgSurface->w;
+    double zoomy = 28 / (float)ImgSurface->h;
+    
+    SDL_Surface* sized = zoomSurface( ImgSurface, zoomx, zoomy, SMOOTHING_OFF );
     
     int i = 0;
     for (unsigned c = 0; c < 28; c++)
     {
     	for (unsigned l = 0; l < 28; l++)
     	{
-    	    img->pixels[i] = get_pixel(ImgSurface, l, c);
+    	    img->pixels[i] = get_pixel(sized, l, c);
     	    i ++;
     	}
     }
