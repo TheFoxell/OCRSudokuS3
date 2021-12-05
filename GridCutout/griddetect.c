@@ -23,6 +23,7 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
   for(int x = 0; x < width;x++) //Histo of Columns
     {
       int sum = 0;
+      int max = 0;
       for(int y = 0; y < height; y++)
 	{
 	  Uint32 pixel = get_pixel(image,x,y);
@@ -32,16 +33,15 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
 
 	  if(r + g + b < 500)
 	      sum++;
-	}
-      if(sum > (width / 2.5)) //Detection cols
-	{
-	  for(int y = 0; y < height; y++)//Set line in red
+	  else
 	    {
-	      Uint32 pixel = 0xFF0000FF;
-	      put_pixel(image, x, y, pixel);
+	      if(sum > max)
+		max = sum;
+	      sum = 0;
 	    }
-	  hCols[x] = sum;
 	}
+      if(max > (width / 3)) //Detection cols
+	  hCols[x] = max;
       else
 	hCols[x] = 0;
     }
@@ -49,6 +49,7 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
   for(int y = 0; y < height;y++) //Histo of Rows
     {
       int sum = 0;
+      int max = 0;
       for(int x = 0; x < width; x++)
 	{
 	  Uint32 pixel = get_pixel(image,x,y);
@@ -58,16 +59,15 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
 
 	  if(r + g + b < 500)
 	      sum++;
-	}
-      if(sum > (height / 2.5)) //Detection rows
-	{
-	  for(int x = 0; x < width; x++)//Set line in red
+	  else
 	    {
-	      Uint32 pixel = 0xFF0000FF;
-	      put_pixel(image, x, y, pixel);
+	      if(sum > max)
+		max = sum;
+	      sum = 0;
 	    }
-	  hRows[y] = sum;
 	}
+      if(max > (height / 3)) //Detection rows
+	hRows[y] = max;
       else
 	hRows[y] = 0;
     }
@@ -164,7 +164,7 @@ SDL_Surface* GridDetect(SDL_Surface* image)
 
   MakeHisto(image,hCols,hRows);
   Find(hCols, width-1, paraListCols);
-  Find(hRows, height, paraListRows);
+  Find(hRows, height-1, paraListRows);
 
   printf("%u %u \n", paraListCols[0], paraListCols[1]);
   printf("%u %u \n", paraListRows[0], paraListRows[1]);

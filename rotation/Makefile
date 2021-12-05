@@ -9,7 +9,7 @@ LDLIBS= `pkg-config --libs sdl SDL_image` -lm
 
 all: main
 
-main: pixel_operations.c rotation.c
+main: ../tool/tool_image.c ../tool/pixel_operations.c rotation.c
 
 
 clean:
