@@ -67,8 +67,8 @@ int main()
 {
   /*
     param : RotAndCut(name, sens);
-    sens = 1 : left rotation
-    sens = 2 : right rotation
+    sens = 1  : left rotation
+    sens = -1 : right rotation
   */
   
   RotAndCut("image_torotate1.jpg", 1);
