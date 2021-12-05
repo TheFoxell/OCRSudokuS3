@@ -1,21 +1,30 @@
-# Simple SDL mini Makefile
+# Makefile
 
-CC=gcc
+CPPFLAGS = -MMD
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 `pkg-config --cflags sdl`
+LDFLAGS =
+LDLIBS = -lm `pkg-config --libs sdl` -lSDL -lSDL_image
 
-CPPFLAGS= `pkg-config --cflags sdl` -MMD
-CFLAGS= -Wall -Wextra -Werror -std=c99 -O3
-LDFLAGS=
-LDLIBS= `pkg-config --libs sdl SDL_image`
+SRC = main.c  gridcut.c griddetect.c ../tool/pixel_operations.c ../tool/tool_image.c
+
+OBJ = ${SRC:.c=.o}
+DEP = ${SRC:.c=.d}
 
 all: main
 
-main: main.o gridcut.o griddetect.o pixel_operations.o
+main: ${OBJ}
 
-main.o: pixel_operations.h griddetect.h gridcut.h
+run: all
+	./main
+
+.PHONY: clean
 
 clean:
-	${RM} *.o
-	${RM} *.d
-	${RM} main
+	${RM} ${OBJ}   # remove object files
+	${RM} ${DEP}   # remove dependency files
+	${RM} main     # remove main program
+
+-include ${DEP}
 
 # END
