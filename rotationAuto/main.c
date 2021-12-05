@@ -19,5 +19,5 @@ int main()
     sens = -1 : right rotation                                                  
   */                                                                            
                                                                                 
-  RotAndCut("image_torotate1.jpg", -1);                                         
+  RotAndCut("image_torotate1.jpg", 1);                                         
 }    
