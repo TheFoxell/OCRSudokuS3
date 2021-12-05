@@ -40,7 +40,7 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
 	      sum = 0;
 	    }
 	}
-      if(max > (width / 3)) //Detection cols
+      if(max > (width / 4)) //Detection cols
 	  hCols[x] = max;
       else
 	hCols[x] = 0;
@@ -66,7 +66,7 @@ void MakeHisto(SDL_Surface* image, int hCols[], int hRows[])
 	      sum = 0;
 	    }
 	}
-      if(max > (height / 3)) //Detection rows
+      if(max > (height / 4)) //Detection rows
 	hRows[y] = max;
       else
 	hRows[y] = 0;

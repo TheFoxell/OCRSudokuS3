@@ -2,11 +2,11 @@
 #include <string.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
-#include "pixel_operations.h"
-#include "grayscale.h"
+#include "../tool/pixel_operations.h"                                           
+#include "../tool/tool_image.h"      
 
 
-int grayscale()
+int grayscale(char filename[])
 {
     // display an image
     SDL_Surface* image_surface;
@@ -14,7 +14,7 @@ int grayscale()
 
     init_sdl();
 
-    image_surface = load_image("simpleblackandwhite/my_image.jpg");
+    image_surface = load_image(filename);
     screen_surface = display_image(image_surface);
 
     // wait a key
@@ -52,6 +52,8 @@ int grayscale()
 
     //redraw the surfaces
     update_surface(screen_surface, image_surface);
+
+    SDL_SaveBMP(image_surface, "image_bin.jpg");
     
     //wait for a key0
     wait_for_keypressed();
