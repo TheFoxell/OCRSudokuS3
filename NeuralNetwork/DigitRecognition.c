@@ -48,10 +48,13 @@ int main(int argc, char** argv)
     			{
     				int sizePath = 1024;
   				char path[sizePath];
-  				snprintf(path, sizePath, "./Cases/%d%d.png", l, c);
+  				snprintf(path, sizePath, "GridCutout/Cases/%d%d.png", l, c);
     				result[l][c] = findDigit(&network, path);
+    				printf("number is : %hhu", findDigit(&network, path));
     			}
 		}*/
+		
+		
     		return 0;
     	}
     			
