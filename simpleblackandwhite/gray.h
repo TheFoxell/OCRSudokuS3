@@ -3,6 +3,6 @@
 
 #include <stdlib.h>
 
-int grayscale();
+int grayscale(char filename[]);
 
 #endif
