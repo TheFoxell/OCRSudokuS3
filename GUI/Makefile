@@ -4,9 +4,9 @@ CPPFLAGS = -MMD
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 `pkg-config --cflags sdl`
 LDFLAGS =
-LDLIBS = -lm `pkg-config --libs sdl` -lSDL -lSDL_image
+LDLIBS = -lm `pkg-config --libs sdl` -lSDL -lSDL_image -lSDL_ttf
 
-SRC = main.c solver.c parseur.c draw.c ../tool/pixel_operations.c ../tool/tool_image.c
+SRC = main.c  ../tool/pixel_operations.c ../tool/tool_image.c
 
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}
