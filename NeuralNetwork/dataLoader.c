@@ -115,15 +115,43 @@ Image* putPixels(char *path, Image* img)
     
     SDL_Surface* sized = zoomSurface( ImgSurface, zoomx, zoomy, SMOOTHING_OFF );
     
+    
     int i = 0;
     for (unsigned c = 0; c < 28; c++)
     {
     	for (unsigned l = 0; l < 28; l++)
     	{
+    	    //Invert white and black
+    	    /*Uint32 pixel = get_pixel(sized, l, c);
+    	    Uint8 r, g, b;
+    	    SDL_GetRGB(pixel, sized->format, &r, &g, &b);
+	    if(r + g + b < 500)
+	    {
+	    	if (c <=5 || l <=5)
+	    	{
+	    		pixel = SDL_MapRGB(sized->format, 0, 0, 0);
+	    		put_pixel(sized, l, c, pixel);
+	    	}
+	    	else
+	    	{
+	    		pixel = SDL_MapRGB(sized->format, 255, 255, 255);
+	    		put_pixel(sized, l, c, pixel);
+	    	}
+	    }
+	    else
+	    {
+	    	pixel = SDL_MapRGB(sized->format, 0, 0, 0);
+	    	put_pixel(sized, l, c, pixel);
+	    }*/
+	    
+	    
     	    img->pixels[i] = get_pixel(sized, l, c);
     	    i ++;
     	}
     }
+    
+    //SDL_SaveBMP(sized, "image");
+    
     return img;
 }
 

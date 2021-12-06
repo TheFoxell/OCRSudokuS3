@@ -1,18 +1,14 @@
-#include "nn.h"
-#include <err.h>
+#include "DigitRecognition.h"
 
-int main(int argc, char** argv)
+uint8_t DigitRecognition(char command)
 {
     Network network;
     initNetwork(&network);
     
-    if(argc >= 1) //At least must have one minimum argument
+    if(command) //At least must have one minimum argument
     {
-    	if(!strcmp(argv[1], "test")) //Train and test the Neural Network with MNIST database showing accuracy
+    	if(command == "test")) //Train and test the Neural Network with MNIST database showing accuracy
             {
-		if (argc > 2)
-			errx(1,"Too many args");
-		
 		Network network;
     		initNetwork(&network);
     		
@@ -27,35 +23,32 @@ int main(int argc, char** argv)
                 return 0;
             }
     	
-    	if(!strcmp(argv[1], "find")) //Train and find value of the input images
+    	if(command == "finddigit")) //Train and find value of the input images
         {
-		if (argc > 2)
-			errx(1,"Too many args");
 			
 		Network network;
     		initNetwork(&network);
     		
-    		int result[9][9];
+    		uint8_t result[9][9];
 
 		for(int i=0; i<TRAINING_EPOCHS; ++i)
     			trainNetwork(&network);
     		
-    		printf("number is : %hhu", findDigit(&network, "10.png"));
-    		
-    		/*for(int l = 0; l < 9; l++)
+    		for(int l = 0; l < 9; l++)
     		{
+    			printf("\n");
     			for(int c = 0; c < 9; c++)
     			{
     				int sizePath = 1024;
   				char path[sizePath];
-  				snprintf(path, sizePath, "GridCutout/Cases/%d%d.png", l, c);
+  				snprintf(path, sizePath, "../GridCutout/Cases2/%d%d", l, c);
     				result[l][c] = findDigit(&network, path);
-    				printf("number is : %hhu", findDigit(&network, path));
+    				printf("%hhu ", result[l][c]);
     			}
-		}*/
+		}
 		
 		
-    		return 0;
+    		return result;
     	}
     			
                 	
