@@ -8,9 +8,9 @@
 #include "../tool/tool_image.h"
 #include "../rotation/rotation.h"
 #include "../simpleblackandwhite/gray.h"
-#include "../rotationAuto/RotAndCut.h"
+#include "../rotationAuto/rotationAuto.h"
 #include "../solver/solver.h"
-
+#include "../NeuralNetwork/DigitRecognition.h"
 
 int Run(char filename[])
 {
