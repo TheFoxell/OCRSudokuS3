@@ -1,5 +1,5 @@
 #include <SDL/SDL.h>
-#include "pixel_operations.h"
+#include "../tool/pixel_operations.h"
 
 void sGrayscale(Uint32 grayscale[], int i, int j)
 {

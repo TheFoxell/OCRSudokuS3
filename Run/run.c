@@ -22,13 +22,13 @@ void Run(char filename[])
   grayscale(filename); //Binarisation image
 
   
-  RotAndCut("image_bin.jpg",-1);
+  RotAndCut("image_torotate1.jpg",1);
   
   //int mat[9][9] = RecognizeDigit("Cases");
 
   typedef int Matrice[9][9];
 
-  Matrice mat2 =
+  /*Matrice mat2 =
     {
      {0,2,0,0,0,0,6,0,9},
      {8,5,7,0,6,4,2,0,0},
@@ -39,6 +39,19 @@ void Run(char filename[])
      {0,0,0,4,0,0,0,6,0},
      {0,0,2,8,7,0,1,3,5},
      {1,0,6,0,0,0,0,2,0},
+    };*/
+
+  Matrice mat3 =
+    {
+     {0,0,0,0,0,4,5,8,0},
+     {0,0,0,7,2,1,0,0,3},
+     {4,0,3,0,0,0,0,0,0},
+     {2,1,0,0,6,7,0,0,4},
+     {0,7,0,0,0,0,2,0,0},
+     {6,3,0,0,4,9,0,0,1},
+     {3,0,6,0,0,0,0,0,0},
+     {0,0,0,1,5,8,0,0,6},
+     {0,0,0,0,0,6,9,5,0},
     };
     
   /*
@@ -49,9 +62,9 @@ void Run(char filename[])
     }
   */
   
-  solve(mat2);
+  solve(mat3);
 
-  drawSudoku(mat2,"SudokuSolve",5);
+  drawSudoku(mat3,"SudokuSolve",8);
   
   
 }

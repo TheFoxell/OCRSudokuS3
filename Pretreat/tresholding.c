@@ -1,7 +1,7 @@
 #include <err.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
-#include "pixel_operations.h"
+#include "../tool/pixel_operations.h"
 
 //Returns the histogram of the pixel values
 Uint8* histogram(SDL_Surface *img)
