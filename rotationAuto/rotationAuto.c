@@ -31,6 +31,10 @@ void RotAndCut(char filename[], int sens)
   
   image = load_image(filename);
   image2 = image;
+
+  display_image(image);
+
+  wait_for_keypressed();
   
   int width = image->w;
   int height = image->h;

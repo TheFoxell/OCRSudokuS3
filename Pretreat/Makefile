@@ -10,9 +10,9 @@ LDLIBS= `pkg-config --libs sdl SDL_image`
 all: display grayscale
 
 display: display.o
-grayscale: pixel_operations.o grayscale.o tresholding.o
+grayscale: ../tool/pixel_operations.o ../tool/tool_image.o grayscale.o tresholding.o
 
-grayscale.o: pixel_operations.h tresholding.h
+grayscale.o: ../tool/pixel_operations.h ../tool/tool_image.h tresholding.h
 
 clean:
 	${RM} *.o
