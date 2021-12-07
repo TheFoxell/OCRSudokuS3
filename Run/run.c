@@ -10,31 +10,48 @@
 #include "../simpleblackandwhite/gray.h"
 #include "../rotationAuto/rotationAuto.h"
 #include "../solver/solver.h"
-#include "../NeuralNetwork/DigitRecognition.h"
+//#include "../NeuralNetwork/DigitRecognition.h"
 
-int Run(char filename[])
+void Run(char filename[])
 {
-  SDL_Surface* image;
-  SDL_Surface* result;
 
   init_sdl();
 
-  image = load_image(filename);
-  result = image;
+  //SDL_Surface* image = load_image(filename);
 
   grayscale(filename); //Binarisation image
 
   
   RotAndCut("image_bin.jpg",-1);
   
-  int mat[9][9] = RecognizeDigit("Cases");
-  if(!solver(mat, 0,0))
-    {
-      RotAndCut("image_bin.jpg",1);
-      mat = RecognizeDigit("Cases")
-    }
+  //int mat[9][9] = RecognizeDigit("Cases");
 
-  drawSudoku(mat,"SudokuSolve",5);
+  typedef int Matrice[9][9];
+
+  Matrice mat2 =
+    {
+     {0,2,0,0,0,0,6,0,9},
+     {8,5,7,0,6,4,2,0,0},
+     {0,9,0,0,0,1,0,0,0},
+     {0,1,0,6,5,0,3,0,0},
+     {0,0,8,1,0,3,5,0,0},
+     {0,0,3,0,2,9,0,8,0},
+     {0,0,0,4,0,0,0,6,0},
+     {0,0,2,8,7,0,1,3,5},
+     {1,0,6,0,0,0,0,2,0},
+    };
+    
+  /*
+    if(!solve(mat2, 0,0))
+    {
+    RotAndCut("image_bin.jpg",1);
+    mat = RecognizeDigit("Cases")
+    }
+  */
+  
+  solve(mat2);
+
+  drawSudoku(mat2,"SudokuSolve",5);
   
   
 }

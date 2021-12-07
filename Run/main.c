@@ -2,7 +2,7 @@
 
 int main()
 {
-  Run("image_01.jpg");
+  Run("my_image.jpg");
   
   return 0;
 }
