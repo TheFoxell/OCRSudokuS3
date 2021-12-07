@@ -4,6 +4,7 @@
 # include <SDL.h>
 # include "../tool/tool_image.h"
 # include "SDL/SDL_ttf.h"
+# include "../Run/run.h"
 
 struct Button
 {
@@ -168,10 +169,9 @@ int main(/*int argc, char **argv*/)
                 		continuer = 0;
                 		break;
 			case SDL_MOUSEBUTTONDOWN:
-				printf("oui");
 				a=(int)&event.button;
 				if(a==SDL_BUTTON_LEFT&&mouse_in(start.rect))
-					printf("click\n");
+					Run("my_image.jpg");
         			break;
 		}
 		if (mouse_in(start.rect))

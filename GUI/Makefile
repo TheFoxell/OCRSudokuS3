@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 `pkg-config --cflags sdl`
 LDFLAGS =
 LDLIBS = -lm `pkg-config --libs sdl` -lSDL -lSDL_image -lSDL_ttf
 
-SRC = main.c  ../tool/pixel_operations.c ../tool/tool_image.c
+SRC = main.c  ../tool/pixel_operations.c ../tool/tool_image.c ../Run/run.c ../GridCutout/gridcut.c ../GridCutout/griddetect.c ../rotation/rotation.c ../simpleblackandwhite/gray.c ../rotationAuto/rotationAuto.c ../solver/solver.c ../solver/draw.c
 
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}
