@@ -68,9 +68,10 @@ uint8_t findDigit(Network *network, char *path){
 
     Image img;
     putPixels(path, &img);
-    feedForward(network, &img);
+    
 
-    int maxIndex = getClassification(&network->outputLayer);
+    feedForward(network, &img);
+    uint8_t maxIndex = getClassification(&network->outputLayer);
     
     return maxIndex;
         

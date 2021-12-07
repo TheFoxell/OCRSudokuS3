@@ -1,13 +1,11 @@
 #include "DigitRecognition.h"
 
-uint8_t DigitRecognition(char command)
+int DigitRecognition(int command, uint8_t matrix[9][9])
 {
     Network network;
     initNetwork(&network);
     
-    if(command) //At least must have one minimum argument
-    {
-    	if(command == "test")) //Train and test the Neural Network with MNIST database showing accuracy
+    	if(command == 2) //Train and test the Neural Network with MNIST database showing accuracy
             {
 		Network network;
     		initNetwork(&network);
@@ -23,13 +21,12 @@ uint8_t DigitRecognition(char command)
                 return 0;
             }
     	
-    	if(command == "finddigit")) //Train and find value of the input images
+    	if(command == 1) //Train and find value of the input images
         {
 			
 		Network network;
     		initNetwork(&network);
     		
-    		uint8_t result[9][9];
 
 		for(int i=0; i<TRAINING_EPOCHS; ++i)
     			trainNetwork(&network);
@@ -41,24 +38,38 @@ uint8_t DigitRecognition(char command)
     			{
     				int sizePath = 1024;
   				char path[sizePath];
-  				snprintf(path, sizePath, "../GridCutout/Cases2/%d%d", l, c);
-    				result[l][c] = findDigit(&network, path);
-    				printf("%hhu ", result[l][c]);
+  				snprintf(path, sizePath, "../GridCutout/Cases/%d%d", l, c);
+    				matrix[l][c] = findDigit(&network, path);
+    				printf("%hhu ", matrix[c][l]);
     			}
 		}
-		
-		
-    		return result;
+			
+    		return 0;
+    	}
+    	
+    	if(command == 3) //Train and find value of test input images
+        {
+			
+		Network network;
+    		initNetwork(&network);
+    		
+
+		for(int i=0; i<TRAINING_EPOCHS; ++i)
+    			trainNetwork(&network);
+    		
+    		for (int digit = 1; digit <10; digit++)
+    		{
+    			int sizePath = 1024;
+  			char path[sizePath];
+  			snprintf(path, sizePath, "Test/%d.png", digit);
+    			printf("%hhu ", findDigit(&network, path));
+    		}
+    		
+    		return 0;
+    	
     	}
     			
                 	
-    }
-    
-    else
-    {
-        printf("'./DigitRecognition' needs at least one argument.\n");
-        return 1;
-    }
-    
+   
     
 }
