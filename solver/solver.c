@@ -44,7 +44,7 @@ int solve_rec(int grid[9][9],int x, int y)
 {
 	if (y>8)
 	{
-		return 0;
+		return 1;
 	}
 
 	int nextX = x + 1;
@@ -69,12 +69,12 @@ int solve_rec(int grid[9][9],int x, int y)
 			grid[y][x] = i;
                 	if (solve_rec(grid,nextX,nextY))
                     	{
-				return 0;
+				return 1;
                     	}
                     	grid[y][x] = 0;
                 }
         }
-        return 1;
+        return 0;
 }
 
 void solve(int grid[9][9])
