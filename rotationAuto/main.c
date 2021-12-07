@@ -11,13 +11,19 @@
 #include "../tool/pixel_operations.h"
 #include "rotationAuto.h"
 
-int main()                                                                      
+int main(int argc, char** argv)                                                                      
 {                                                                               
   /*                                                                            
     param : RotAndCut(name, sens);                                              
     sens = 1  : left rotation                                                   
     sens = -1 : right rotation                                                  
-  */                                                                            
-                                                                                
-  RotAndCut("image_torotate1.jpg", 1);                                         
-}    
+  */
+  if(argc >= 1)
+    {
+      if(!strcmp(argv[1], "1"))
+	RotAndCut("image_torotate1.jpg", 1);
+      
+      if(!strcmp(argv[1], "-1"))
+	RotAndCut("image_torotate2.jpg", -1);     
+    }    
+}
