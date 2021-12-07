@@ -1,4 +1,4 @@
 #include "nn.h"
 #include <err.h>
 
-uint8_t DigitRecognition(char command);
+int DigitRecognition(int command, uint8_t matrix[9][9]);
