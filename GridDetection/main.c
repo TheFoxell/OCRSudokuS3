@@ -19,23 +19,23 @@ SDL_Surface* GlBlur(SDL_Surface* image)
       exp(-(x * x + y * y) / (2 * sigma * sigma));
   }
 
-  double filtre[11][11];
+  double filtre[9][9];
   double sigma = 0.84089642;
 
   int x,y;
-  for(y = -5; y <= 5;y++)
-    for(x = -5 ; x <= 5; x++)
-      filtre[x + 5][y + 5] = g(x,y,sigma);
+  for(y = -4; y <= 4;y++)
+    for(x = -4 ; x <= 4; x++)
+      filtre[x + 4][y + 4] = g(x,y,sigma);
 
-  for(y = 0; y < 11; y++)
+  for(y = 0; y < 9; y++)
     {
-      for (x = 0; x < 11; x++)
+      for (x = 0; x < 9; x++)
 	printf("%.2f ", filtre[x][y]);
     }
 
-  for(int x = 5; x < width - 5; x++)
+  for(int x = 4; x < width - 4; x++)
     {
-      for(int y = 5; y < height - 5;y++)
+      for(int y = 4; y < height - 4;y++)
 	{
 	  double redVal = 0.0;
 	  double greenVal = 0.0;
@@ -43,11 +43,11 @@ SDL_Surface* GlBlur(SDL_Surface* image)
 
 	  //Convolution step
 
-	  for(int filtreX = -5; filtreX <= 5; filtreX++)
+	  for(int filtreX = -4; filtreX <= 4; filtreX++)
 	    {
-	      for(int filtreY = -5; filtreY <= 5; filtreY++)
+	      for(int filtreY = -4; filtreY <= 4; filtreY++)
 		{
-		  double filtreVal = filtre[filtreX + 5][filtreY + 5];
+		  double filtreVal = filtre[filtreX + 4][filtreY + 4];
 
 		   Uint32 pixel = get_pixel(image, x - filtreX, y - filtreY);
 		   Uint8 r,g,b;
